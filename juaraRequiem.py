@@ -1,7 +1,29 @@
 def sortPeserta(peserta):
-    # Kerjakan di sini yaw
-    pass
-
+    if len(peserta) <= 1:
+        return peserta
+    mid= len(peserta)//2
+    kiri = peserta[:mid]
+    kanan = peserta[mid:]
+    kiri = sortPeserta(kiri)
+    kanan = sortPeserta(kanan)
+    return sortp(kiri,kanan)
+def sortp(kiri,kanan):
+    result = []
+    i=0
+    j=0
+    while i < len(kiri) and j < len(kanan):
+        if( 
+        kiri[i]["total"] > kanan[j]["total"] or (
+        kiri[i]["total"] == kanan[j]["total"] and 
+        kiri[i]["penonton"] > kanan[j]["penonton"])):
+            result.append(kiri[i])
+            i +=1
+        else:
+            result.append(kanan[j])
+            j +=1
+    result.extend(kiri[i:])
+    result.extend(kanan[j:])
+    return result
 
 # Program Utama - Jangan di Hapus
 data_awal = [
@@ -43,3 +65,4 @@ if hasil:
         print(f"Juara {i} : {p['nama']} (Total Skor: {p['total']} | Skor Penonton: {p['penonton']})")
 else:
     print("Program belum selesai! Fungsi sortPeserta() belum mengembalikan nilai list yang terurut.")
+
